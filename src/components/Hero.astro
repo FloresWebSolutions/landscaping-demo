@@ -1,0 +1,46 @@
+---
+import { business } from '../config/business';
+import { telHref } from '../lib/utils';
+import Icon from './Icon.astro';
+const { hero } = business;
+---
+
+<section id="top" class="relative overflow-hidden">
+  <div class="wrap grid items-center gap-10 pt-8 pb-14 lg:grid-cols-12 lg:gap-12 lg:pt-14 lg:pb-24">
+    <div class="lg:col-span-6 xl:col-span-5">
+      <h1 class="text-[2.6rem] font-bold text-ink sm:text-6xl lg:text-[4.25rem]">{hero.title}</h1>
+      <p class="mt-6 max-w-[34rem] text-lg text-ink/80">{hero.lede}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <a href="#quote" class="btn-primary">Request a free quote <Icon name="arrow-right" /></a>
+        <a href={telHref} class="btn-quiet tabular-nums"><Icon name="phone" /> Call {business.phone}</a>
+      </div>
+      <ul class="mt-10 grid gap-2.5 text-[0.95rem] text-ink/85">
+        {hero.points.map((p) => <li class="flex items-center gap-2.5"><Icon name="check" class="size-5 text-brand" />{p}</li>)}
+      </ul>
+    </div>
+    <div class="lg:col-span-6 xl:col-span-7 lg:-mr-12 xl:-mr-[max(3rem,calc((100vw-80rem)/2+3rem))]">
+      <img
+        data-reveal
+        src={hero.image.src}
+        alt={hero.image.alt}
+        width={hero.image.width}
+        height={hero.image.height}
+        fetchpriority="high"
+        decoding="async"
+        class="aspect-[4/3] w-full rounded-[14px] object-cover lg:aspect-[5/4] lg:rounded-r-none"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal] {
+      animation: reveal 1.1s var(--ease-out-expo) both;
+    }
+    @keyframes reveal {
+      from { clip-path: inset(0 0 0 100% round 14px); filter: saturate(0.4); }
+      to { clip-path: inset(0 0 0 0 round 14px); filter: none; }
+    }
+  }
+</style>

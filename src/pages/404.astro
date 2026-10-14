@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import { business } from '../config/business';
+---
+
+<Layout title={`Page not found | ${business.shortName}`}>
+  <Header />
+  <main class="wrap py-24 text-center">
+    <h1 class="section-title">This path doesn’t lead anywhere.</h1>
+    <p class="mt-4 text-ink/80">The page may have moved. Head back to the home page to find services, our service area and the quote form.</p>
+    <a href="/" class="btn-primary mt-8">Back to home</a>
+  </main>
+</Layout>

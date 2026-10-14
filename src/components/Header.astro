@@ -1,0 +1,57 @@
+---
+import { business } from '../config/business';
+import { telHref } from '../lib/utils';
+import Icon from './Icon.astro';
+
+const links = [
+  { href: '#services', label: 'Services' },
+  { href: '#seasons', label: 'Seasons' },
+  { href: '#work', label: 'Work' },
+  { href: '#area', label: 'Service area' },
+];
+---
+
+<header data-header class="sticky top-0 z-40 bg-paper/95 transition-shadow duration-200 data-[scrolled]:shadow-[0_6px_18px_-12px_rgb(24_38_29/0.35)]">
+  <div class="wrap flex h-16 items-center justify-between gap-6">
+    <a href="#top" class="flex min-h-11 items-center gap-2.5 font-display text-xl font-bold tracking-tight text-ink no-underline">
+      <img src={business.favicon} alt="" width="28" height="28" class="size-7" />
+      {business.shortName}
+    </a>
+
+    <nav class="hidden items-center gap-8 text-[0.95rem] font-medium lg:flex" aria-label="Main">
+      {links.map((l) => <a href={l.href} class="text-ink/80 no-underline transition hover:text-brand">{l.label}</a>)}
+    </nav>
+
+    <div class="hidden items-center gap-3 lg:flex">
+      <a href={telHref} class="btn-quiet min-h-11 px-4 tabular-nums"><Icon name="phone" /> {business.phone}</a>
+      <a href="#quote" class="btn-primary min-h-11 px-4">Request a quote</a>
+    </div>
+
+    <details class="group relative lg:hidden">
+      <summary
+        class="flex size-11 cursor-pointer list-none items-center justify-center rounded-md border border-ink/20 [&::-webkit-details-marker]:hidden"
+        aria-label="Menu"
+      >
+        <Icon name="list" class="size-6 group-open:hidden" />
+        <Icon name="x" class="hidden size-6 group-open:block" />
+      </summary>
+      <nav
+        class="absolute right-0 mt-2 w-60 rounded-lg border border-ink/10 bg-surface p-2 shadow-[0_18px_40px_-20px_rgb(24_38_29/0.45)]"
+        aria-label="Mobile"
+      >
+        {links.map((l) => <a href={l.href} class="block rounded-md px-3 py-3 font-medium no-underline hover:bg-soft">{l.label}</a>)}
+        <a href="#quote" class="btn-primary mt-1 w-full">Request a quote</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const onScroll = () => header?.toggleAttribute('data-scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  document.querySelectorAll('header details nav a').forEach((a) =>
+    a.addEventListener('click', () => a.closest('details')?.removeAttribute('open')),
+  );
+</script>

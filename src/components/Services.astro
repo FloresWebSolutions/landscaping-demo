@@ -1,0 +1,38 @@
+---
+import { business } from '../config/business';
+const [a, b] = business.servicePhotos;
+---
+
+<section id="services" class="border-t border-ink/10">
+  <div class="wrap grid gap-12 py-16 lg:grid-cols-12 lg:gap-16 lg:py-24">
+    <div class="lg:col-span-4">
+      <div class="lg:sticky lg:top-24">
+        <h2 class="section-title">What we do</h2>
+        <p class="mt-5 max-w-md text-ink/80">
+          Six services, one crew. Prices are typical starting points for a suburban lot; every job gets a written quote after a site visit.
+        </p>
+        <div class="mt-8 hidden gap-4 lg:grid">
+          <img src={a.src} alt={a.alt} width={a.width} height={a.height} loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-[14px] object-cover" />
+          <img src={b.src} alt={b.alt} width={b.width} height={b.height} loading="lazy" decoding="async" class="aspect-[4/3] w-4/5 rounded-[14px] object-cover" />
+        </div>
+      </div>
+    </div>
+    <ol class="lg:col-span-8">
+      {
+        business.services.map((s) => (
+          <li id={`service-${s.id}`} class="grid gap-4 border-b border-ink/15 py-8 first:pt-0 sm:grid-cols-[1fr_auto] sm:gap-x-10">
+            <h3 class="text-2xl font-semibold sm:text-[1.75rem]">{s.name}</h3>
+            <p class="text-[0.95rem] font-semibold whitespace-nowrap text-brand tabular-nums sm:row-span-1 sm:pt-1.5 sm:text-right">{s.price}</p>
+            <p class="max-w-[60ch] text-ink/80 sm:col-span-2">{s.summary}</p>
+            <ul class="grid gap-x-8 gap-y-1.5 text-[0.95rem] text-ink/75 sm:col-span-2 sm:grid-cols-2">
+              {s.includes.map((i) => <li class="pl-4 relative before:absolute before:left-0 before:top-[0.7em] before:h-px before:w-2 before:bg-brand">{i}</li>)}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <div class="wrap -mt-4 pb-16 lg:hidden">
+    <img src={a.src} alt={a.alt} width={a.width} height={a.height} loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-[14px] object-cover" />
+  </div>
+</section>

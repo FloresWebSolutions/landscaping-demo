@@ -1,0 +1,49 @@
+---
+import { business } from '../config/business';
+const g = business.gallery;
+// Asymmetric layout: spans tuned for 7 photos on a 6-column grid.
+const spans = [
+  'lg:col-span-4 lg:row-span-2',
+  'lg:col-span-2',
+  'lg:col-span-2',
+  'lg:col-span-3',
+  'lg:col-span-3',
+  'lg:col-span-2',
+  'lg:col-span-4',
+];
+---
+
+<section id="work" class="py-16 lg:py-24">
+  <div class="wrap">
+    <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
+      <h2 class="section-title lg:col-span-7">Recent kinds of work</h2>
+      <p class="max-w-lg text-[0.95rem] text-ink/75 lg:col-span-5">
+        {business.demoMode
+          ? 'Illustrative, openly licensed photos from Wikimedia Commons. They are not projects by this fictional company; credits are in the footer.'
+          : 'A selection of gardens, lawns and stonework from the last few seasons.'}
+      </p>
+    </div>
+    <ul class="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:auto-rows-[15rem] lg:grid-cols-6">
+      {
+        g.map((p, i) => (
+          <li class:list={['flex flex-col', i === 0 ? 'col-span-2' : '', spans[i]]}>
+            <figure class="flex h-full flex-col">
+              <div class:list={['relative flex-1 overflow-hidden rounded-[14px] bg-soft', i === 0 ? 'aspect-[4/3] lg:aspect-auto' : 'aspect-square sm:aspect-[4/3] lg:aspect-auto']}>
+                <img
+                  src={p.src}
+                  alt={p.alt}
+                  width={p.width}
+                  height={p.height}
+                  loading="lazy"
+                  decoding="async"
+                  class="absolute inset-0 size-full object-cover"
+                />
+              </div>
+              <figcaption class="mt-2 text-sm font-medium text-ink/80">{p.caption}</figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

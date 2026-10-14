@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/public-sans';
+
+/* Brand colors come from src/config/business.ts via CSS variables set on <html>. */
+@theme inline {
+  --color-brand: var(--brand-primary);
+  --color-brand-contrast: var(--brand-primary-contrast);
+  --color-ink: var(--brand-ink);
+  --color-paper: var(--brand-paper);
+  --color-surface: var(--brand-surface);
+  --color-soft: var(--brand-soft);
+  --font-sans: 'Public Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', 'Public Sans Variable', ui-sans-serif, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    scrollbar-color: color-mix(in oklch, var(--brand-ink) 35%, transparent) var(--brand-paper);
+    accent-color: var(--brand-primary);
+  }
+  body {
+    @apply bg-paper font-sans text-[1.0625rem] leading-relaxed text-ink antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-display text-balance;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--brand-soft); color: var(--brand-ink); }
+  :focus-visible { outline: 2px solid var(--brand-primary); outline-offset: 3px; border-radius: 4px; }
+  a { text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+@utility btn {
+  @apply inline-flex min-h-12 whitespace-nowrap items-center justify-center gap-2 rounded-md px-5 text-[0.95rem] font-semibold transition duration-150 ease-out;
+}
+@utility btn-primary {
+  @apply btn bg-brand text-brand-contrast hover:bg-ink active:translate-y-px;
+}
+@utility btn-quiet {
+  @apply btn border border-ink/20 text-ink hover:border-ink hover:bg-ink/5;
+}
+@utility wrap {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+}
+@utility section-title {
+  @apply text-4xl font-semibold text-ink sm:text-5xl;
+}
+@utility field {
+  @apply w-full rounded-md border border-ink/25 bg-surface px-3.5 py-3 text-base text-ink placeholder:text-ink/70 transition focus:border-brand focus:ring-2 focus:ring-brand/25 focus:outline-none;
+}
