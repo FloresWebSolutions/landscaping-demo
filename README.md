@@ -1,4 +1,4 @@
-# Alder & Stone landscaping demo (sample site)
+# Alder & Stone landscaping demo (sample site) 
 
 A one-page landscaping website demo built by SVK (mavrickweb.com) on Astro + Tailwind v4.
 **Alder & Stone Landscape Co. is fictional.** All business details are sample data; photos are openly licensed (see IMAGE_CREDITS.md).
